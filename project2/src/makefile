@@ -1,0 +1,30 @@
+NP_SIMPLE_SRCS = np_simple.cpp 
+NP_SINGLE_PROC_SRCS = np_single_proc.cpp
+NP_MULTI_PROC_SRCS = np_multi_proc.cpp
+EXT  = .cpp
+NP_SIMPLE_OBJS = $(NP_SIMPLE_SRCS:$(EXT)=.o)
+NP_SINGLE_PROC_OBJS = $(NP_SINGLE_PROC_SRCS:$(EXT)=.o)
+NP_MULTI_PROC_OBJS = $(NP_MULTI_PROC_SRCS:$(EXT)=.o)
+NP_SIMPLE_EXEC = np_simple
+NP_SINGLE_PROC_EXEC = np_single_proc
+NP_MULTI_PROC_EXEC = np_multi_proc
+CXX  = g++
+#CXXFLAGS = -std=c++11 -pthread -Wall -g -D _DEBUG
+CXXFLAGS = -std=c++11
+
+all:$(NP_SIMPLE_EXEC) $(NP_SINGLE_PROC_EXEC) $(NP_MULTI_PROC_EXEC) clean
+
+$(NP_SIMPLE_EXEC):$(NP_SIMPLE_OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NP_SIMPLE_EXEC) $(NP_SIMPLE_OBJS)
+
+$(NP_SINGLE_PROC_EXEC):$(NP_SINGLE_PROC_OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NP_SINGLE_PROC_EXEC) $(NP_SINGLE_PROC_OBJS)
+
+$(NP_MULTI_PROC_EXEC):$(NP_MULTI_PROC_OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NP_MULTI_PROC_EXEC) $(NP_MULTI_PROC_OBJS)
+
+%.o:%$(EXT)
+	$(CXX) $(CXXFLAGS) -c $<
+
+clean:
+	rm -rf *.o

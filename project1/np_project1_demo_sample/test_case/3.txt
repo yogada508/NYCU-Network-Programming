@@ -1,0 +1,10 @@
+removetag test.html |7
+ls |1
+number > ls.txt
+removetag0 test.html !1
+number |1
+number |2
+cat -n ls.txt
+
+wc -c
+exit
